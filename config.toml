@@ -1,5 +1,37 @@
-baseURL = "https://sungjaejung1031.github.io/"
+baseurl = "/"
+title = "SLOW-MOTION"
 languageCode = "en-us"
-title = "SLOW MOTION"
+paginate = "10" # Number of posts per page
 theme = "slow-motion"
-enforceLightMode  = "true" # Force the site to always load in light mode.
+disqusShortname = "" # Enable comments by entering your Disqus shortname
+googleAnalytics = "" # Enable Google Analytics by entering your tracking id
+
+[Author]
+  name = "Sungjae Jung"
+  bio = "Informatik of Informatiklavier"
+  avatar = "img/avatar.png"
+
+[Params]
+  description = "slow-motion" # Description of blog site
+  opengraph = true
+  twitter_cards = false
+  readmore = false # Show "Read more" button in list if true
+  authorbox = true
+  pager = true
+  post_meta = ["date", "categories"] # Order of post meta information
+  highlightColor = "#0065bd" # Override highlight color
+
+[Params.logo]
+  image = "img/icons/slow-motion.gif"
+  subtitle = "NOT TO BE FAST BUT TO BE" # Logo subtitle
+
+[Params.sidebar]
+  home = "right"   # Configure layout for home page
+  list = "right"   # Configure layout for list pages
+  single = "right" # Configure layout for single pages
+  # Enable widgets in given order
+  widgets = ["search", "recent", "categories", "taglist"]
+
+[Params.widgets]
+  recent_num = 5 # Set the number of articles in the "Recent articles" widget
+  tags_counter = true # Enable counter for each tag in "Tags" widget (disabled by default)

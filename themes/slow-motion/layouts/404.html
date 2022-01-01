@@ -1,8 +1,8 @@
 {{ define "main" }}
-<div class="never wrap">
-  <h1>{{ T "404_title" }}</h1>
-  <p class="pale">{{ T "could_not_find" }}</p><br>
-  <div class="button btn_back">{{ T "go_back" }}</div>
-</div>
+<main class="main" role="main">
+	<div class="warning">
+		<h1 class="warning__headline">{{ T "404_title" }}</h1>
+		<p class="warning__text">{{ T "404_text" }} <a href="{{ "" | relLangURL }}">{{ T "404_linktext" }}</a>.</p>
+	</div>
+</main>
 {{ end }}
-

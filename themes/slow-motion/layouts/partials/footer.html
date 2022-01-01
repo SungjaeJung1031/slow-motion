@@ -1,14 +1,8 @@
-{{- $s := .Site.Params }}
-{{ $t := .Site.Title }}
-{{- if or .Params.enableMathNotation $s.enableMathNotation }}
-  {{ partialCached "math" . }}
-{{- end }}
-{{- $iconsDir := default "icons/" .Site.Params.iconsDir }}
-{{- $defaultFooterLogo := printf "%s%s" $iconsDir "apple-touch-192X192.ico"}}
 <footer class="footer">
-  <div class="footer_inner wrap pale">
-    <img src='{{ absURL (default $defaultFooterLogo $s.footerLogo) }}' class="icon icon_2 transparent" alt="{{ $t }}">
-    <p>{{ T "copyright" }}{{ with $s.since }}&nbsp;{{ . }}-{{ end }}&nbsp;<span class="year"></span>&nbsp;{{ upper $t }}. {{ T "all_rights" }}</p>
-    {{- partialCached "top" .}}
-  </div>
+	<div class="container footer__container flex">
+		{{ partial "footer_links.html" . }}
+		<div class="footer__copyright">
+			&copy; {{ now.Format "2006" }} {{ .Site.Params.copyright | default .Site.Title }}.
+		</div>
+	</div>
 </footer>

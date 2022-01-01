@@ -1,40 +1,28 @@
-{{- define "main" }}
-{{- $s := .Site.Params }}
-{{- $p := .Params }}
-{{- $scratch := newScratch }}
-{{- if isset $p "image" }}
-  {{- $scratch.Set "image" $p.image }}
-{{- else }}
-  {{ $scratch.Set "image" $s.fallBackOgImage }}
-{{- end }}
-{{- $image := $scratch.Get "image" }}
-{{- $bg := absLangURL (path.Join "images" $image) }}
-<div class="{{ if ne $p.singleColumn true }}grid-inverse {{ end }}wrap content">
-  <article class="post_content">
-    {{- $t := .Title }}
-    <h1 class="post_title">{{ $t }}</h1>
-    {{- partial "post-meta" . }}
-    {{ with $p.featureImage }}
-    <img src="{{ . }}" class="image_featured" alt="{{ $t }}">
-    {{ end }}
-    {{ if $p.toc }}
-    <h2>{{ T "overview" }}</h2>
-    {{ .TableOfContents }}
-    {{ end }}
-    {{- .Content }}
-    {{- $showComments := true }}
-    {{- if eq $s.comments false }}
-      {{- $showComments = false }}
-    {{- else if eq $p.comments false }}
-      {{- $showComments = false }}
-    {{- end }}
-    {{- if ne $showComments false }}
-      {{- partial "comments" . }}
-    {{- end }}
-    {{- partial "i18nlist" . }}
-  </article>
-  {{- if ( ne $p.sidebar false ) }}
-    {{- partial "sidebar" . }}
-  {{ end }}
-</div>
-{{- end }}
+{{ define "main" }}
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">{{ .Title }}</h1>
+			{{- with .Params.lead }}
+			<p class="post__lead">{{ . }}</p>
+			{{- end }}
+			{{ with partial "post_meta.html" . -}}
+			<div class="post__meta meta">{{ . }}</div>
+			{{- end }}
+		</header>
+		{{ partial "post_thumbnail.html" (dict "class" "post" "page" .) }}
+		{{- partial "post_toc.html" . -}}
+		<div class="content post__content clearfix">
+			{{ .Content }}
+		</div>
+		{{- if .Params.tags }}
+		<footer class="post__footer">
+			{{ partial "post_tags.html" . }}
+		</footer>
+		{{- end }}
+	</article>
+</main>
+{{ partial "authorbox.html" . }}
+{{ partial "pager.html" . }}
+{{ partial "comments.html" . }}
+{{ end }}

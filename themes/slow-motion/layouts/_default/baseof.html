@@ -1,80 +1,70 @@
-{{- $s := .Site.Params }}
-{{- $p := .Params }}
 <!DOCTYPE html>
-<html lang="{{ .Lang }}" data-figures="{{ $p.figurePositionShow }}"{{ if .IsPage }} class="page"{{ end }}{{ if .IsHome }} class="home"{{ end }}{{ with $s.enforceLightMode }} data-mode="lit"{{ end }}{{ with $s.enforceDarkMode }} data-mode="dim"{{ end }}>
-  <head>
-    {{- partial "head" . }}
-    <!-- styles definition-->
-    {{- $options := (dict "targetPath" "css/styles.css" "outputStyle" "compressed" "enableSourceMap" "true") -}}
-    {{ $mainSassFile :=  "sass/main.sass" }}
-    {{- $styles := resources.Get $mainSassFile | resources.ExecuteAsTemplate $mainSassFile . | resources.ToCSS $options | resources.Fingerprint "sha512" }}
+<html class="no-js" lang="{{ .Site.Language.Lang }}">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>{{ block "title" . }}{{ if not .IsHome }}{{ .Title }} - {{ end }}{{ .Site.Title }}{{ end }}</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="{{ if .IsHome }}{{ .Site.Params.description }}{{ else }}{{ .Params.Description }}{{ end }}">
+	{{- if .Site.Params.opengraph }}
+		{{ template "_internal/opengraph.html" . }}
+	{{- end }}
+	{{- if .Site.Params.schema }}
+		{{ template "_internal/schema.html" . }}
+	{{- end }}
+	{{- if .Site.Params.twitter_cards }}
+		{{ template "_internal/twitter_cards.html" . }}
+	{{- end }}
 
-    <!-- scripts definition -->
-    {{- $highlightPath := "js/highlight.js" }}
-    {{- $highlight := resources.Get $highlightPath | resources.ExecuteAsTemplate $highlightPath . }}
+	{{- $googleFontsLink := .Site.Params.googleFontsLink | default "https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700" }}
+	{{- if hasPrefix $googleFontsLink "https://fonts.googleapis.com/" }}
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" {{ printf `href="%s"` $googleFontsLink | safeHTMLAttr }}>
+	{{- end }}
 
-    {{- $functionsScriptPath := "js/functions.js" }}
-    {{- $functions := resources.Get $functionsScriptPath | resources.ExecuteAsTemplate $functionsScriptPath . }}
+	{{ $style := resources.Get "css/style.css" | resources.ExecuteAsTemplate "css/style.css" . -}}
+	<link rel="stylesheet" href="{{ $style.RelPermalink }}">
+	{{ range .Site.Params.customCSS -}}
+	<link rel="stylesheet" href="{{ . | relURL }}">
+	{{- end }}
 
-    {{- $codeScriptPath := "js/code.js" }}
-    {{- $code := resources.Get $codeScriptPath | resources.ExecuteAsTemplate $codeScriptPath . }}
+	{{- with .OutputFormats.Get "rss" }}
+	{{ printf `<link rel="%s" type="%s" href="%s" title="%s">` .Rel .MediaType.Type .RelPermalink $.Site.Title | safeHTML }}
+	{{- end }}
 
-    {{- $customScriptPath := "js/custom.js" }}
-    {{ if (fileExists "../../assets/js/custom.js") }}
-      {{ $customScriptPath := "../../assets/js/custom.js" }}
-    {{ end }}
-    {{- $custom := resources.Get $customScriptPath | resources.ExecuteAsTemplate $customScriptPath . }}
-
-    {{- $mainScriptPath := "js/index.js" }}
-    {{- $main := resources.Get $mainScriptPath | resources.ExecuteAsTemplate $mainScriptPath . }}
-
-    {{- $bundle := slice $highlight $functions $code $main $custom | resources.Concat "js/bundle.js" | resources.Minify | resources.Fingerprint "sha512" -}}
-
-    <!-- preload assets declaration -->
-    <link rel="preload" href="{{ $styles.Permalink }}" integrity = "{{ $styles.Data.Integrity }}" as="style" crossorigin="anonymous">
-    <link rel="preload" href="{{ $bundle.Permalink }}" as="script" integrity=
-    "{{ $bundle.Data.Integrity }}" crossorigin="anonymous">
-
-    <!-- styles file -->
-    <link rel="stylesheet" type="text/css" href="{{ $styles.Permalink }}" integrity="{{ $styles.Data.Integrity }}" crossorigin="anonymous">
-    {{- with $s.customCSS }}
-    {{- range . -}}
-	  <link rel="stylesheet" href="{{ relURL . }}">
-    {{- end }}
-    {{- end }}
-    {{ partial "hooks/head-end.html" . }}
-  </head>
-  {{- $maxCodeLines := 100 }}
-  {{- with $s.codeMaxLines }}
-    {{- $maxCodeLines = . }}
-  {{- end }}
-  {{- with $p.codeMaxLines }}
-    {{- $maxCodeLines = . }}
-  {{- end }}
-  {{- $codeLineNumbers := false }}
-  {{ with $s.codeLineNumbers }}
-    {{- $codeLineNumbers = . }}
-  {{ end }}
-  {{ with $p.codeLineNumbers }}
-    {{- $codeLineNumbers = . }}
-    {{ else }}
-    {{ if eq $p.codeLineNumbers false }}
-      {{- $codeLineNumbers = false }}
-    {{ end }}
-  {{ end }}
-  <body data-code="{{ $maxCodeLines }}" data-lines="{{ $codeLineNumbers }}" id="documentTop">
-    {{- partial "header" . }}
-    <main>
-      {{- block "main" . }}{{ end }}
-    </main>
-    {{- partialCached "icons" . }}
-    {{- partialCached "footer" . }}
-    <script type="text/javascript" src="{{ $bundle.Permalink }}" integrity="{{ $bundle.Data.Integrity }}" crossorigin="anonymous"></script>
-    {{- with $s.customJS }}
-    {{- range . -}}
-    <script type="text/javascript" src="{{ relURL . }}" ></script>
-    {{- end }}
-    {{- end }}
-    {{ partialCached "hooks/body-end.html" . }}
-  </body>
+	<link rel="shortcut icon" href="{{ "favicon.ico" | relURL }}">
+	{{- if not .Site.IsServer }}
+		{{- if hasPrefix .Site.GoogleAnalytics "G-" }}
+		{{ template "_internal/google_analytics.html" . }}
+		{{- else }}
+		{{ template "_internal/google_analytics_async.html" . }}
+		{{- end }}
+	{{- end }}
+</head>
+<body class="body">
+	<div class="container container--outer">
+		{{ block "header" . }}{{ partial "header.html" . }}{{ end }}
+		<div class="wrapper flex">
+			<div class="primary">
+			{{ block "main" . }}
+				{{ with .Content }}
+				<div class="content main__content clearfix">
+					{{ . }}
+				</div>
+				{{ end }}
+			{{ end }}
+			</div>
+			{{ block "sidebar" . }}{{ partial "sidebar.html" . }}{{ end }}
+		</div>
+		{{ block "footer" . }}{{ partial "footer.html" . }}{{ end }}
+	</div>
+<script async defer src="{{ "js/menu.js" | relURL }}"></script>
+{{ range .Site.Params.customJS -}}
+<script src="{{ . | relURL }}"></script>
+{{- end }}
+{{- partial "mathjax.html" . -}}
+</body>
 </html>
