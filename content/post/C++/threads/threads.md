@@ -1,5 +1,5 @@
 ---
-title: THREADS PROGRAMMING
+title: C++::THREADS
 date: 2022-01-01
 tags: [
     "C++",
