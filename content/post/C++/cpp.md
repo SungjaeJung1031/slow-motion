@@ -1,5 +1,5 @@
 ---
-title: C++::HOME
+title: C++|HOME
 date: 2022-01-02
 tags: [
     C++,
