@@ -3,7 +3,7 @@ title = "SLOW-MOTION"
 languageCode = "en-us"
 paginate = "10" # Number of posts per page
 theme = "slow-motion"
-disqusShortname = "" # Enable comments by entering your Disqus shortname
+disqusShortname = "sungjaejung1031" # Enable comments by entering your Disqus shortname
 googleAnalytics = "" # Enable Google Analytics by entering your tracking id
 
 [Author]
@@ -13,13 +13,24 @@ googleAnalytics = "" # Enable Google Analytics by entering your tracking id
 
 [Params]
   description = "slow-motion" # Description of blog site
-  opengraph = true
+  # copyright = "John Doe" # Footer copyright holder, otherwise will use site title
+  opengraph = true # Enable OpenGraph if true
+  # schema = true # Enable Schema
   twitter_cards = false
   readmore = false # Show "Read more" button in list if true
   authorbox = true
+  # toc = true # Enable Table of Contents
   pager = true
+  mathjax = true # Enable MathJax
+  # mathjaxPath = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js" # Specify MathJax path
+  # mathjaxConfig = "TeX-MML-AM_CHTML" # Specify MathJax config, {TeX-AMS-MML_HTMLorMML, ...}
   post_meta = ["date", "categories"] # Order of post meta information
   highlightColor = "#0065bd" # Override highlight color
+  # mainSections = ["post", "blog", "news"] # Specify section pages to show on home page and the "Recent articles" widget
+  # dateformat = "2006-01-02" # Change the format of dates
+  # googleFontsLink = "https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700" # Load Google Fonts
+  # customCSS = ["css/custom.css"] # Include custom CSS files
+  # customJS = ["js/custom.js"] # Include custom JS files
 
 [Params.logo]
   image = "img/icons/slow-motion.gif"
@@ -35,3 +46,6 @@ googleAnalytics = "" # Enable Google Analytics by entering your tracking id
 [Params.widgets]
   recent_num = 5 # Set the number of articles in the "Recent articles" widget
   tags_counter = true # Enable counter for each tag in "Tags" widget (disabled by default)
+
+[Params.thumbnail]
+  visibility = ["list", "post"] # Control thumbnail visibility ["list", "post"] 
