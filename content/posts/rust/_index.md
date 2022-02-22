@@ -1,7 +1,7 @@
 ---
 menu:
   after:
-    name: AI
+    name: Rust
     weight: 5
-title: AI
+title: Rust
 ---
