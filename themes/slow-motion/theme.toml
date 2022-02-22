@@ -1,19 +1,16 @@
-name = "slow-motion"
-license = "GPLv2"
-licenselink = "https://github.com/vimux/mainroad/blob/master/LICENSE.md"
-description = "tbd."
-homepage = "https://github.com/SungjaeJung1031/slow-motion/"
-demosite = "tbd."
-tags = ["blog", "responsive", "light", "multilingual", "customizable", "widgets", "wordpress"]
-features = ["blog", "responsive", "multilingual", "widgets", "rss", "disqus", "google analytics", "wordpress"]
-min_version = "0.48"
+# theme.toml template for a Hugo theme
+# See https://github.com/gohugoio/hugoThemes#themetoml for an example
+
+name = "Book"
+license = "MIT"
+licenselink = "https://github.com/alex-shpak/hugo-book/blob/master/LICENSE"
+description = "Hugo documentation theme as simple as plain book"
+homepage = "https://github.com/alex-shpak/hugo-book"
+demosite = "https://hugo-book-demo.netlify.app"
+tags = ["responsive", "clean", "documentation", "docs", "flexbox", "search", "mobile", "multilingual", "disqus"]
+features = []
+min_version = "0.68"
 
 [author]
-  name = "Sungjae Jung"
-  homepage = "https://github.com/SungjaeJung1031"
-
-# If porting an existing theme
-#[original]
-#  name = "MH Magazine lite"
-#  homepage = "https://wordpress.org/themes/mh-magazine-lite/"
-#  repo = "https://themes.trac.wordpress.org/browser/mh-magazine-lite/2.5.6"
+  name = "Alex Shpak"
+  homepage = "https://github.com/alex-shpak/"
