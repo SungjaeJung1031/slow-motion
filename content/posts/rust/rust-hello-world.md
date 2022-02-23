@@ -17,7 +17,7 @@ categories: [
 <!--more-->
 {{< katex display >}}
 
-1. Create main.rs file and enter the code in the below code block.
+1. Create hello-world.rs file and enter the code in the below code block.
 
 ```go {linenos=table,hl_lines=[8,"15-17"],linenostart=0}
 fn main()
@@ -28,11 +28,16 @@ fn main()
 
 2. Save the file and run the file
 ```
-$ rustc main.rs
-$ ./main
+> rustc hello-world.rs
+> ./hello-world
 ```
 
 {{< expand "Output">}}
 Hello, world!
 {{< /expand >}}
 
+{{< hint info >}}
+**Source Code**
+
+Source code in this post is provided in the [link](https://github.com/SungjaeJung1031/rust/blob/main/rust-hello-world/hello-world.rs).
+{{< /hint >}}
