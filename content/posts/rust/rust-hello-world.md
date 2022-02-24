@@ -15,7 +15,6 @@ categories: [
 ]
 ---
 <!--more-->
-{{< katex display >}}
 
 1. Create hello-world.rs file and enter the code in the below code block.
 
