@@ -98,7 +98,7 @@ After saving main.rs, enter the one of the following commands in the project's r
 > cargo build
 ```
 {{< expand "Output">}}
-Compiling hello-cargo v0.1.0 (/Users/sungjaejung1031/dev/rust/rust-hello-cargo/hello-cargo)
+Compiling hello-cargo v0.1.0 (/.../rust-hello-cargo/hello-cargo)
 Finished dev [unoptimized + debuginfo] target(s) in 0.46s
 {{< /expand >}}
 
@@ -106,7 +106,7 @@ Finished dev [unoptimized + debuginfo] target(s) in 0.46s
 > cargo build --release
 ```
 {{< expand "Output">}}
-Compiling hello-cargo v0.1.0 (/Users/sungjaejung1031/dev/rust/rust-hello-cargo/hello-cargo)
+Compiling hello-cargo v0.1.0 (/.../rust/rust-hello-cargo/hello-cargo)
 Finished release [optimized] target(s) in 0.50s
 {{< /expand >}}
 
@@ -138,7 +138,7 @@ Below command helps to check if your cargo project can be compiled without produ
 > cargo check
 ```
 {{< expand "Output">}}
-Checking hello-cargo v0.1.0 (/Users/sungjaejung1031/dev/rust/rust-hello-cargo/hello-cargo)
+Checking hello-cargo v0.1.0 (.../rust/rust-hello-cargo/hello-cargo)
 Finished dev [unoptimized + debuginfo] target(s) in 0.03s
 {{< /expand >}}
 
